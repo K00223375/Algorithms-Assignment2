@@ -11,6 +11,9 @@ package assignment2;
  */
 public class TestClass extends javax.swing.JFrame {
 
+    public LinkedQueue empQueue;
+    public Employee emp1;
+    public Employee emp2;
     /**
      * Creates new form Main
      */
@@ -27,19 +30,25 @@ public class TestClass extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea = new javax.swing.JTextArea();
         insertButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
         qSizeButton = new javax.swing.JButton();
         frontButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTextArea.setColumns(20);
+        jTextArea.setRows(5);
+        jScrollPane1.setViewportView(jTextArea);
 
         insertButton.setText("Insert");
 
@@ -89,15 +98,15 @@ public class TestClass extends javax.swing.JFrame {
                         .addComponent(qSizeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(frontButton)
-                        .addGap(0, 0, 0)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(insertButton)
                     .addComponent(deleteButton)
@@ -120,6 +129,7 @@ public class TestClass extends javax.swing.JFrame {
 
     private void qSizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qSizeButtonActionPerformed
         // TODO add your handling code here:
+        jTextArea.append("Size of the stack is " + empQueue.size());
     }//GEN-LAST:event_qSizeButtonActionPerformed
 
     private void frontButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frontButtonActionPerformed
@@ -168,6 +178,8 @@ public class TestClass extends javax.swing.JFrame {
     private javax.swing.JButton frontButton;
     private javax.swing.JButton insertButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton qSizeButton;
     private javax.swing.JButton searchButton;

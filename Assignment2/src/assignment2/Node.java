@@ -11,11 +11,11 @@ package assignment2;
  */
 public class Node 
 {
-    private Object element;
+    private String element;
 	private Node next;
 
 	// Constructors
-	public Node(Object e, Node n)
+	public Node(String e, Node n)
 	{
 		element = e;
 		next = n;
@@ -26,14 +26,14 @@ public class Node
             
         }
         
-        public Object getElement()
+        public String getElement()
 	{	return element;	}
 	
 	public Node getNext()
 	{	return next;	}
 	
 	// Modifier methods
-	public void setElement(Object newElem)
+	public void setElement(String newElem)
 	{
 		element = newElem;
 	}
