@@ -5,6 +5,8 @@
  */
 package assignment2;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author k00223375
@@ -19,6 +21,13 @@ public class TestClass extends javax.swing.JFrame {
      */
     public TestClass() {
         initComponents();
+        //setJTA();
+        empQueue=new LinkedQueue();
+        emp1 = new Employee();
+        emp2 = new Employee(987,"Rain","Carl",33);
+        
+        empQueue.append(emp1);
+        empQueue.append(emp2);
     }
 
     /**
@@ -39,6 +48,8 @@ public class TestClass extends javax.swing.JFrame {
         searchButton = new javax.swing.JButton();
         qSizeButton = new javax.swing.JButton();
         frontButton = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        printQueue = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -51,6 +62,11 @@ public class TestClass extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea);
 
         insertButton.setText("Insert");
+        insertButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertButtonActionPerformed(evt);
+            }
+        });
 
         deleteButton.setText("Delete");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +96,19 @@ public class TestClass extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        printQueue.setText("Print Queue");
+        printQueue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printQueueActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,6 +116,7 @@ public class TestClass extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(insertButton)
@@ -98,8 +128,9 @@ public class TestClass extends javax.swing.JFrame {
                         .addComponent(qSizeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(frontButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(printQueue)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +143,10 @@ public class TestClass extends javax.swing.JFrame {
                     .addComponent(deleteButton)
                     .addComponent(searchButton)
                     .addComponent(qSizeButton)
-                    .addComponent(frontButton))
+                    .addComponent(frontButton)
+                    .addComponent(printQueue))
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -121,21 +155,108 @@ public class TestClass extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+        if (empQueue.size() <= 0) {
+            jTextField1.setText("Queue is empty! No DELETE has occurred!");
+            
+        } else {
+            empQueue.serve();
+            jTextField1.setText("DELETE has occurred!");
+            setJTA();
+            jTextArea.append(empQueue.printQueue());
+            jTextArea.append("-------------------------------------------------------------------------- \n");
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
+        if (empQueue.size() == 0) {
+            jTextField1.setText("Queue is empty! \n");
+            
+
+        } else {
+            String input = JOptionPane.showInputDialog("Search for Employee by Lastname: ");
+            String lName = input.toUpperCase();
+            if(empQueue.searchQueue(lName)==true)
+            {
+                jTextField1.setText(lName+ ", is in the Queue! \n");
+            }
+            else
+            {
+                jTextField1.setText(lName + ", not found in the Queue! \n");
+            }
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void qSizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qSizeButtonActionPerformed
         // TODO add your handling code here:
-        jTextArea.append("Size of the stack is " + empQueue.size());
+        String outputText="Size of the Queue is "+ empQueue.size();
+        jTextField1.setText(outputText);
     }//GEN-LAST:event_qSizeButtonActionPerformed
 
     private void frontButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frontButtonActionPerformed
         // TODO add your handling code here:
+        
+        if (empQueue.size() <= 0) {
+            jTextField1.setText("Queue is empty! No Employee Details to Print!");
+            
+        } else {
+           
+            jTextArea.append("The Front of the Queue is: \n");
+            jTextArea.append("Emp No.\tSurname\tFirstname\tAge\n");
+            jTextArea.append(empQueue.front()+"\n");
+            jTextArea.append("-------------------------------------------------------------------------- \n");
+
+        }
+        
     }//GEN-LAST:event_frontButtonActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void printQueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printQueueActionPerformed
+        // TODO add your handling code here:
+        if (empQueue.size() <= 0) {
+            jTextField1.setText("Queue is empty! No Employee Details to Print!");
+            
+        } else {
+           
+            setJTA();
+            jTextArea.append(empQueue.printQueue());
+            jTextArea.append("-------------------------------------------------------------------------- \n");
+
+        }
+    }//GEN-LAST:event_printQueueActionPerformed
+
+    private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
+        // TODO add your handling code here:
+        String input = JOptionPane.showInputDialog("Input Employee Number: ");
+        int idNum = Integer.parseInt(input);
+
+        input = JOptionPane.showInputDialog("Input Last Name: ");
+        String lName = input.toUpperCase();
+        
+        input = JOptionPane.showInputDialog("Input First Name: ");
+        String fName = input;
+
+        input = JOptionPane.showInputDialog("Input Age: ");
+        int age = Integer.parseInt(input);
+
+
+        emp1 = new Employee(idNum, lName,fName, age);
+        empQueue.append(emp1);
+        jTextField1.setText("New Employee Details have been added to the End of the Queue!");
+        setJTA();
+        jTextArea.append(empQueue.printQueue());
+        jTextArea.append("-------------------------------------------------------------------------- \n");
+        
+    }//GEN-LAST:event_insertButtonActionPerformed
+
+    public void setJTA()
+    {
+        jTextArea.append("The Queue Contains: \n");
+        jTextArea.append("Emp No.\tSurname\tFirstname\tAge\n");
+    }
     
     /**
      * @param args the command line arguments
@@ -181,6 +302,8 @@ public class TestClass extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton printQueue;
     private javax.swing.JButton qSizeButton;
     private javax.swing.JButton searchButton;
     // End of variables declaration//GEN-END:variables

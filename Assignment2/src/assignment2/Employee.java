@@ -16,33 +16,32 @@ public class Employee
     private String firstName;
     private String lastName;
     
-    public Employee(int empNum, String fName, String lName, int age)
+    public Employee(int empNum, String lName, String fName, int age)
     {
         this.empNumber = empNum;
-        this.firstName = fName;
         this.lastName = lName.toUpperCase();
+        this.firstName = fName;
         this.age = age;
     }
     
     public Employee() 
     {
         this.empNumber = 123;
-        this.firstName = "Bob";
         this.lastName = "Bush".toUpperCase();
-        this.age = 21;
+        this.firstName = "Bob";
+        this.age = 45;
     }
     
     
-    public String printStudentDetails() 
+    public String printEmployeeDetails() 
     {
-        String studentInfo = "";
-        String studentExams="";
+        String emplInfo = "";
         
-        studentInfo += "ID = " + this.empNumber + "\n";
-        studentInfo += "FName = " + this.firstName + "\n";
-        studentInfo += "LName = " + this.lastName + "\n";
-        studentInfo += "Age = " + this.age + "\n";
-        return studentInfo;
+        emplInfo += this.empNumber + "\t";
+        emplInfo += this.lastName + "\t";
+        emplInfo += this.firstName + "\t";
+        emplInfo += this.age;
+        return emplInfo;
     }
     
     

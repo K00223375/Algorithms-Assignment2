@@ -38,7 +38,7 @@ public class LinkedQueue
 		return (qSize == 0);
 	}
 
-        public Object front( )     		
+        public String front( )     		
 	{
 		if (isEmpty())
 			System.out.println("Queue is Empty");
@@ -47,10 +47,10 @@ public class LinkedQueue
                 return head.getElement();
 	}
 
-        public void append (Object obj) // insert an element 
+        public void append (Employee empl) // insert an element 
 	{
-		Node node = new Node( );
-		node.setElement(obj);
+		Node node = new Node();
+		node.setElement(empl);
 		node.setNext(null);     	// node will be new tail node
 		if (qSize == 0)
 			head = node;      	// special case of  a previously 					// empty queue
@@ -61,23 +61,52 @@ public class LinkedQueue
 		qSize++;
 	}
         
-        public Object serve( ) 
+        public String serve( ) 
 	// Remove the first object from the queue
 	{
-		Object obj="";
+		String temp="";
 		if (qSize == 0)
 		 System.out.println("Queue is empty.");
 		else {
-			obj = head.getElement();
+			temp = head.getElement();
 			head = head.getNext();
 			qSize--;
 		}
 		if (qSize == 0)
                 {
 			tail = null;
-                }   // the queue is now 				   // empty
-		return obj;	
+                }   
+		return temp;	
 	  }
+        
+        public boolean searchQueue(String lastName)
+    {
+        Node tempPtr = head;
+        while (tempPtr != null) 
+        {
+            if(tempPtr.getElement().contains(lastName))
+            {
+                return true;
+            }
+            else
+            {
+               tempPtr=tempPtr.getNext();
+            }
+        }
+        return false;
+    }
 
+        
+    public String printQueue() {
+
+        Node pTemp = head;
+        String tempInfo = "";
+        while (pTemp != null) {
+            tempInfo += pTemp.getElement() + "\n";
+
+            pTemp = pTemp.getNext();
+        }
+        return tempInfo;
+    }    
 
 }

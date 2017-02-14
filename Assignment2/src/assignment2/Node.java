@@ -33,9 +33,9 @@ public class Node
 	{	return next;	}
 	
 	// Modifier methods
-	public void setElement(String newElem)
+	public void setElement(Employee newElem)
 	{
-		element = newElem;
+		element = newElem.printEmployeeDetails();
 	}
 
 	public void setNext(Node newNext)
